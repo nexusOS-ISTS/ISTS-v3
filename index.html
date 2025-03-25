@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ISTS – Instant Subconscious Transformation System</title>
+  <title>ISTS Lite – Instant Subconscious Transformation</title>
   <style>
     body {
       background-color: #0e0e0e;
@@ -32,7 +32,7 @@
       font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 30px;
+      margin-top: 20px;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -40,30 +40,75 @@
     button:hover {
       background-color: #00c8b0;
     }
+    #output {
+      margin-top: 20px;
+      background-color: #121212;
+      padding: 20px;
+      border-radius: 6px;
+      line-height: 1.6em;
+    }
+    input, select {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: none;
+    }
   </style>
 </head>
 <body>
-  <h1>ISTS</h1>
+  <h1>ISTS Lite</h1>
   <div class="container">
     <h2>Instant Subconscious Transformation System</h2>
-    <p>ISTS is a live, interactive system that uses logic, subconscious pattern recognition, and symbolic reinforcement to reprogram unwanted behaviors, thoughts, and emotional loops in real time.</p>
-    <p>Before starting:</p>
-    <ul>
-      <li>Be in a quiet space</li>
-      <li>Set a clear intention (e.g., pain, cravings, anxiety, etc.)</li>
-      <li>Be honest with your feedback</li>
-    </ul>
-    <p>This tool will guide you through real subconscious transformation using the Nexus framework and advanced pattern techniques.</p>
-
-    <button onclick="startISTS()">Start ISTS Session</button>
+    <p>Select an issue you'd like to work on:</p>
+    <select id="issue">
+      <option value="pain">Physical Pain</option>
+      <option value="cravings">Food Cravings</option>
+      <option value="anxiety">Anxiety</option>
+      <option value="lowEnergy">Low Energy</option>
+      <option value="custom">Custom Input</option>
+    </select>
+    <div id="customInputContainer" style="display:none;">
+      <input type="text" id="customInput" placeholder="Describe your issue...">
+    </div>
+    <button onclick="runISTS()">Start ISTS Session</button>
+    <div id="output"></div>
   </div>
 
   <script>
-    function startISTS() {
-      const confirmed = confirm("Make sure you're signed into ChatGPT first. Click OK to continue.");
-      if (confirmed) {
-        window.open("https://chat.openai.com/share/716dc147-2848-4b2d-8ec5-f41bfe2c7c1a", "_blank");
+    const issueSelector = document.getElementById("issue");
+    const customInputContainer = document.getElementById("customInputContainer");
+
+    issueSelector.addEventListener("change", () => {
+      if (issueSelector.value === "custom") {
+        customInputContainer.style.display = "block";
+      } else {
+        customInputContainer.style.display = "none";
       }
+    });
+
+    function runISTS() {
+      const output = document.getElementById("output");
+      let issue = issueSelector.value;
+      if (issue === "custom") {
+        issue = document.getElementById("customInput").value.trim();
+        if (!issue) {
+          output.innerHTML = "<p>Please describe your custom issue.</p>";
+          return;
+        }
+      }
+
+      // Simulated output
+      output.innerHTML = `<h3>ISTS Session Started</h3>
+        <p><strong>Issue Selected:</strong> ${issue}</p>
+        <p>Pattern identified. Loop detected related to "${issue}".</p>
+        <p>Initiating symbolic transformation: You enter your Nexus room. You see a glowing control panel.</p>
+        <p>Find the dial, lever, or button that relates to your issue. Adjust it now.</p>
+        <p>Feel the shift as your subconscious begins restructuring the loop.</p>
+        <p>Loop automation installed: Every time you feel the effects of "${issue}", it triggers healing and transformation.</p>
+        <p>Affirmation: I am changing now. My subconscious supports this shift fully.</p>
+        <p>To reinforce, revisit this process daily and adjust your Nexus control panel intentionally.</p>`;
     }
   </script>
 </body>
