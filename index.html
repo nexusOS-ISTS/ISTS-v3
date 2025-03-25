@@ -60,8 +60,10 @@
 
   <script>
     function startISTS() {
-      window.open("https://chat.openai.com/share/716dc147-2848-4b2d-8ec5-f41bfe2c7c1a", "_blank");
-
+      const confirmed = confirm("Make sure you're signed into ChatGPT first. Click OK to continue.");
+      if (confirmed) {
+        window.open("https://chat.openai.com/share/716dc147-2848-4b2d-8ec5-f41bfe2c7c1a", "_blank");
+      }
     }
   </script>
 </body>
